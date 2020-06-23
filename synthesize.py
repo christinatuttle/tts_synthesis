@@ -6,9 +6,7 @@ import sys
 
 # Number of command line arguments (format: sythesize.py INPUT_FILE PITCH FREQUENCY [OUTPUT_FILE])
 cmd_args = len(sys.argv)
-if cmd_args < 4:
-	print("Please provide arguments INPUT_FILE PITCH FREQUENCY [OUTPUT_FILE]")
-	exit()
+assert (cmd_args >= 4),"Please provide arguments INPUT_FILE PITCH FREQUENCY [OUTPUT_FILE]"
 
 # Google Cloud Credentials: auth setup https://cloud.google.com/docs/authentication/getting-started
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = '/Users/christinatuttle/Downloads/text-to-speech-service-account.json'
@@ -23,11 +21,13 @@ with open(file, 'r') as f:
     # Set the text input to be synthesized
     synthesis_input = texttospeech.SynthesisInput(text=text)
 
-# Set pitch, range [-20.0, 20.0]
+# Set pitch
 req_pitch = int(sys.argv[2])
+assert (req_pitch >= -20 and req_pitch <= 20),"Pitch range [-20.0, 20.0]"
 
-# Set frequency, range [8000, 48000]
+# Set frequency
 req_freq = int(sys.argv[3])
+assert (req_freq >= 8000 and req_freq <= 48000),"Frequency range [8000, 48000]"
 
 # Build the voice request, select the language code ("en-US") and the ssml voice gender ("neutral")
 voice = texttospeech.VoiceSelectionParams(
