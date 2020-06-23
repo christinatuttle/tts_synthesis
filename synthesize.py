@@ -9,6 +9,7 @@ cmd_args = len(sys.argv)
 assert (cmd_args >= 4),"Please provide arguments INPUT_FILE PITCH FREQUENCY [OUTPUT_FILE]"
 
 # Google Cloud Credentials: auth setup https://cloud.google.com/docs/authentication/getting-started
+# Must update credentials before using
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = '/Users/christinatuttle/Downloads/text-to-speech-service-account.json'
 
 # Instantiates a client
